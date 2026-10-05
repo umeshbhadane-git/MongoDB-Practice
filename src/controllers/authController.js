@@ -8,7 +8,13 @@ const AppError = require("../errors/AppError");
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const registerSchema = z.object({
-    email: z.string().email("Invalid email"),
+    name: z
+        .string()
+        .min(2, "Name must be at least 2 characters"),
+
+    email: z
+        .string()
+        .email("Invalid email"),
 
     password: z
         .string()
@@ -25,7 +31,7 @@ const loginSchema = z.object({
 
 // -----------------------------------------------------------
 
-// REGISTER USER
+// REGISTER USER 
 
 const register = async (req, res, next) => {
     try {
@@ -41,7 +47,7 @@ const register = async (req, res, next) => {
             );
         }
 
-        const { email, password } = result.data;
+        const { name, email, password } = result.data;
 
         // Check if user already exists
         const existingUser = await User.findOne({ email });
@@ -60,6 +66,7 @@ const register = async (req, res, next) => {
 
         // Create user
         const user = await User.create({
+            name,
             email,
             passwordHash
         });
@@ -70,6 +77,7 @@ const register = async (req, res, next) => {
 
             data: {
                 id: user._id,
+                name: user.name,
                 email: user.email,
                 createdAt: user.createdAt
             }

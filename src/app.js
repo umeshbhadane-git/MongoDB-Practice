@@ -2,27 +2,25 @@ const express = require("express");
 
 const authRoutes = require("./routes/authRoutes");
 const noteRoutes = require("./routes/noteRoutes");
+const postRoutes = require("./routes/postRoutes");
 
 const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
 
-
-// Parse JSON request bodies
 app.use(express.json());
 
-
-// Routes
 app.use("/auth", authRoutes);
 
 app.use("/notes", noteRoutes);
+
+app.use("/posts", postRoutes);
 
 
 // 404 handler
 app.use((req, res) => {
     res.status(404).json({
         success: false,
-
         error: {
             message: "Route not found"
         }
@@ -32,6 +30,5 @@ app.use((req, res) => {
 
 // Central error handler
 app.use(errorHandler);
-
 
 module.exports = app;

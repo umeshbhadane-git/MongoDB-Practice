@@ -17,7 +17,7 @@ const noteSchema = new mongoose.Schema(
 
         tags: {
             type: [String],
-            default: []
+            default: [] 
         },
 
         owner: {

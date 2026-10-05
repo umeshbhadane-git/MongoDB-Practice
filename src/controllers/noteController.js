@@ -140,7 +140,7 @@ const createNote = async (req, res, next) => {
             tags: result.data.tags || [],
 
             // NEVER take owner from request body
-            owner: req.user.userId
+            owner: req.user.userId 
         });
 
         res.status(201).json({

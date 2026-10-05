@@ -15,7 +15,7 @@ const router = express.Router();
 // All note routes require authentication
 router.use(requireAuth);
 
-router.get("/", getNotes);
+router.get("/", getNotes); 
 
 router.get("/:id", getNoteById);
 

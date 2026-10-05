@@ -15,7 +15,7 @@ const requireAuth = (req, res, next) => {
                 401
             )
         );
-    }
+    } 
 
 
     // Expected format:
